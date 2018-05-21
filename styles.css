@@ -1,0 +1,42 @@
+/* Elements */
+
+.header {
+  height: 100px;
+}
+
+input[type=text] {
+  background-color: #fafafa;
+  font-size: 20px;
+  border: none;
+  box-shadow:
+}
+
+/* Text */
+
+h1 {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+form {
+  font-family: sans-serif;
+  font-size: 20px;
+  padding-bottom: 32px;
+}
+
+button {
+
+}
+
+#output {
+  font-size: 30px;
+}
+
+li {
+  /* list-style-type: hide; */
+  padding-left: 0px;
+}
+
+li:last-child {
+  display: none;
+}
