@@ -5,10 +5,15 @@
 }
 
 input[type=text] {
-  background-color: #fafafa;
+  background-color: whitesmoke;
+  border: 2px solid #ffffff;
   font-size: 20px;
-  border: none;
-  box-shadow:
+  border-radius: 20px;
+  padding-left: 8px;
+}
+
+input[type=text]:focus {
+  border: 2px solid blue;
 }
 
 /* Text */
@@ -25,7 +30,14 @@ form {
 }
 
 button {
-
+  background-color: blue;
+  border: none;
+  padding: 10px;
+  font-size: 16px;
+  color: white;
+  border-radius: 6px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #output {

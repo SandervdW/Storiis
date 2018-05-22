@@ -48,13 +48,15 @@
     <div class="story_form">
       <!-- USER STORY CREATION FORM -->
       <form>
-        As a <input type="text" id="role" placeholder="role" autofocus>
+        As a <label for="role">role</label><input type="text" id="role" placeholder="role" autofocus>
         I can <input type="text" id="capability" placeholder="capability">,
         so that <input type="text" id="benefit" placeholder="benefit">.
       </form>
 
       <!-- SUBMIT BUTTON -->
-      <button onclick="createStory()">Add Story</button>
+      <div>
+        <button onclick="createStory()">Add Story</button>
+      </div>
     </div>
 
     <!-- OUTPUT -->
