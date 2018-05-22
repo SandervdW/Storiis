@@ -30,6 +30,20 @@
         var element = document.getElementById("saved");
         element.appendChild(para);
       }
+      // DELETE ENTRY
+      function deleteStory () {
+        document.getElementById("role").value = "";
+        document.getElementById("capability").value = "";
+        document.getElementById("benefit").value = "";
+        document.getElementById("role").focus();
+      }
+      // COPY STORY
+      function copyStory() {
+        document.getElementById("copystor").textContent = "Copied!";
+        var copyText = document.getElementById("output");
+        copyText.select();
+        document.execCommand("copy");
+      }
       /* SUBMIT ENTRY WITH ENTER KEY */
       document.onkeydown=function(evt){
         var keyCode = evt ? (evt.which ? evt.which : evt.keyCode) : event.keyCode;
@@ -54,8 +68,10 @@
       </form>
 
       <!-- SUBMIT BUTTON -->
-      <div>
+      <div id="buttons">
         <button onclick="createStory()">Add Story</button>
+        <button class="destructive" onclick="deleteStory()">×</button>
+        <button id="copystor" onclick="copyStory()">Copy</button>
       </div>
     </div>
 
