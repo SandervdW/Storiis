@@ -31,7 +31,7 @@
         element.appendChild(para);
       }
       // DELETE ENTRY
-      function deleteStory () {
+      function deleteStory() {
         document.getElementById("role").value = "";
         document.getElementById("capability").value = "";
         document.getElementById("benefit").value = "";
@@ -39,10 +39,10 @@
       }
       // COPY STORY
       function copyStory() {
-        document.getElementById("copystor").textContent = "Copied!";
-        var copyText = document.getElementById("output");
+        var copyText = document.getElementById("output").textContent;
         copyText.select();
-        document.execCommand("copy");
+        document.execCommand('copy');
+        document.getElementById("copystor").textContent = "Copied!";
       }
       /* SUBMIT ENTRY WITH ENTER KEY */
       document.onkeydown=function(evt){
@@ -66,11 +66,11 @@
         I can <input type="text" id="capability" placeholder="capability">,
         so that <input type="text" id="benefit" placeholder="benefit">.
       </form>
+      <button class="destructive" onclick="deleteStory()">Clear the form</button>
 
       <!-- SUBMIT BUTTON -->
       <div id="buttons">
-        <button onclick="createStory()">Add Story</button>
-        <button class="destructive" onclick="deleteStory()">×</button>
+        <button onclick="createStory()">↩︎ Add Story</button>
         <button id="copystor" onclick="copyStory()">Copy</button>
       </div>
     </div>
