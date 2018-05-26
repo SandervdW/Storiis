@@ -1,12 +1,27 @@
 /* Elements */
 
+@media print
+{
+  .no-print, .no-print *
+  {
+      display: none !important;
+  }
+}
+
 .header {
-  height: 100px;
+  /* height: 100px; */
+}
+
+#logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 body {
   max-width: 1000px;
   display: block;
+  padding: 24px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -21,10 +36,25 @@ input[type=text] {
   color: blue;
 }
 
+label {
+  font-size: 12px;
+  display: none;
+}
+
 input[type=text]:focus {
   border: 2px solid blue;
   background-color: white;
   outline: none;
+}
+
+input::-webkit-calendar-picker-indicator {
+  background-color: inherit;
+  transform: scale(0.8, 0.5);
+  color: lightgrey;
+}
+
+#copyTemp {
+  opacity: 0;
 }
 
 /* Text */
@@ -39,11 +69,41 @@ input[type=text]:focus {
   font-family: 'PlexSans';
   src: url('src/fonts/IBMPlexSans-SemiBold.ttf') format('truetype');
   font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PlexSans';
+  src: url('src/fonts/IBMPlexMono-SemiBoldItalic.ttf') format('truetype');
+  font-weight: 600;
+  font-style: italic;
 }
 
 h1 {
   font-family: 'PlexSans', sans-serif;
+  font-style: normal;
+  font-weight: 600;
   text-align: center;
+  margin-top: -48px;
+  margin-left: 92px;
+  margin-bottom: 30px;
+}
+
+p {
+  font-family: 'PlexSans', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+a {
+  color: blue;
+  text-decoration: none;
+}
+
+a:hover {
+  color: darkblue;
+  background-color: aliceblue;
 }
 
 form {
@@ -52,6 +112,7 @@ form {
   /* padding-bottom: 32px; */
   display: block;
   margin-left: 16px;
+  line-height: 40px;
 }
 
 button {
@@ -78,6 +139,12 @@ button:focus {
   border: 2px solid lightblue;
 }
 
+button[disabled] {
+  background-color: lightgrey;
+  box-shadow: none;
+  border-color: lightgrey;
+}
+
 .destructive {
   background-color: white;
   text-align: center;
@@ -99,6 +166,15 @@ button:focus {
   border-color: red;
 }
 
+.copybutton {
+  float: right;
+  margin: 0px;
+}
+
+.copybutton[disabled] {
+  display: none;
+}
+
 #buttons {
   display: block;
   margin-left: auto;
@@ -113,12 +189,18 @@ button:focus {
   padding: 16px;
 }
 
+#stories {
+  background-color: aliceblue;
+  border-radius: 6px;
+  padding-bottom: 8px;
+}
+
 li {
   list-style-type: none;
   padding-left: 0px;
   background-color: white;
   padding: 16px;
-  margin: 8px 0px;
+  margin: 16px;
   border-radius: 6px;
   text-align: left;
   font-family: 'PlexSans', sans-serif;
@@ -128,4 +210,13 @@ li {
 
 li:last-child {
   display: none;
+}
+
+#footer {
+  text-align: center;
+  color: lightslategrey;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }

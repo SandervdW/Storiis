@@ -3,12 +3,10 @@
   <head>
     <meta charset="UTF-8">
     <title>Storiis &#x26A1; Create user stories faster than lightning</title>
-
     <link rel="stylesheet" href="styles.css">
-
     <script>
       function createStory() {
-        document.getElementById("as").innerHTML = "As a ";
+        document.getElementById("as").innerHTML = "As ";
         document.getElementById("rol").innerHTML = document.getElementById("role").value;
         document.getElementById("can").innerHTML = " I can ";
         document.getElementById("cap").innerHTML = document.getElementById("capability").value;
@@ -20,8 +18,12 @@
         document.getElementById("capability").value = "";
         document.getElementById("benefit").value = "";
         document.getElementById("role").focus();
+        // MAKE BUTTONS ABLE
+        document.getElementById("printstor").disabled = false;
+        document.getElementById("copystor").disabled = false;
+        document.getElementById("downstor").disabled = false;
         /* SAVE PREVIOUS ENTRIES */
-        var copy = document.getElementById("output");
+        var copy = document.getElementById("recent");
         var text = copy.textContent;
 
         var para = document.createElement("li");
@@ -38,13 +40,43 @@
         document.getElementById("benefit").value = "";
         document.getElementById("role").focus();
       }
+
+      // PRINT STORIES
+      function printDiv(){
+  			var printContents = document.getElementById("stories").innerHTML;
+  			var originalContents = document.body.innerHTML;
+  			document.body.innerHTML = printContents;
+  			window.print();
+  			document.body.innerHTML = originalContents;
+  		}
+
       // COPY STORY
       function copyStory() {
-        var copyText = document.getElementById("output").textContent;
+        var rawStory = document.getElementById("recent").textContent;
+        var trimmedText = rawStory.replace(/[\n\r]+|[\s]{2,}/g, ' ').trim();
+        document.getElementById("copyTemp").value = trimmedText;
+        var copyText = document.getElementById("copyTemp");
         copyText.select();
         document.execCommand('copy');
         document.getElementById("copystor").textContent = "Copied!";
+        window.setTimeout(function() {
+          document.getElementById("copystor").textContent = "Copy";
+        }, 5000);
       }
+
+      // DOWNLOAD
+      function downloadInnerHtml(filename, elId, mimeType) {
+        var elHtml = document.getElementById(elId).textContent;
+        var link = document.createElement('a');
+        mimeType = mimeType || 'text/plain';
+
+        link.setAttribute('download', filename);
+        link.setAttribute('href', 'data:' + mimeType + ';charset=utf-8,' + encodeURIComponent(elHtml));
+        link.click();
+      }
+
+        var fileName =  'storiis.txt';
+
       /* SUBMIT ENTRY WITH ENTER KEY */
       document.onkeydown=function(evt){
         var keyCode = evt ? (evt.which ? evt.which : evt.keyCode) : event.keyCode;
@@ -58,28 +90,44 @@
 
   <body>
     <div class="header">
+      <svg id="logo" width="80px" height="43px" viewBox="0 0 80 43" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M1.13641365,18.5669912 C-1.01739494,42.1902347 23.0460816,49.8224167 23.0460816,18.5669912 C23.0460816,-4.85566375 13.9098512,-4.85566375 13.9098512,18.5669912 C13.9098512,51.475769 35.2003785,38.6194339 35.2003785,18.5669912 C35.2003785,1.70194851 28.9371949,4.49854547 28.9371949,18.5669912 C28.9371949,50.5001831 78.5348512,48.7644534 78.5348512,18.5669912" id="Path-4-Copy" stroke="#0000FF" stroke-width="2"></path>
+          </g>
+      </svg>
       <h1>Storiis</h1>
     </div>
     <div class="story_form">
       <!-- USER STORY CREATION FORM -->
       <form>
-        As a <label for="role">role</label><input type="text" id="role" placeholder="role" autofocus>
+        As <label for="role">role</label><input list="roles" type="text" id="role" placeholder="a user" autofocus>
         I can <input type="text" id="capability" placeholder="capability">,
         so that <input type="text" id="benefit" placeholder="benefit">.
+
+        <!-- DROPDOWN MENU FOR ROLES -->
+        <datalist id="roles">
+          <option value="a user">a user</option>
+          <option value="an enterprise user">an enterprise user</option>
+          <option value="a digital native">a digital native</option>
+          <option value="a digital analphabetic">a digital analphabetic</option>
+          <option value="persona 1">persona 1</option>
+          <option value="persona 2">persona 2</option>
+        </datalist>
       </form>
       <button class="destructive" onclick="deleteStory()">Clear the form</button>
 
       <!-- SUBMIT BUTTON -->
       <div id="buttons">
         <button onclick="createStory()">&#8617; Add Story</button>
-        <button id="copystor" onclick="copyStory()">Copy</button>
+        <button id="printstor" onclick="printDiv('stories')" disabled>Print</button>
+        <button id="downstor" onclick="downloadInnerHtml(fileName, 'saved','text/html')" disabled>Download</button>
       </div>
     </div>
 
-    <!-- OUTPUT -->
+    <!-- DIRECT OUTPUT -->
     <div id="stories">
       <div id="output">
-        <span id="as"></span><span id="rol"></span><span id="can"></span><span id="cap"></span><span id="so"></span><span id="ben"></span><span id="punct"></span>
+        <span id="recent"><span id="as"></span><span id="rol"></span><span id="can"></span><span id="cap"></span><span id="so"></span><span id="ben"></span><span id="punct"></span></span><button id="copystor" class="copybutton no-print" onclick="copyStory()" disabled>Copy</button>
       </div>
       <!-- PREVIOUS STORIES -->
       <div id="saved">
@@ -87,6 +135,13 @@
         </ul>
       </div>
     </div>
+    <input type="text" id="copyTemp">
+
+    <div id="footer">
+      <p>Created by Sander van der Woude – 2018</p>
+      <p>This project is open sourced at <a href="https://github.com/SandervdW/Storiis" target="_blank">Github</a> – Follow me on <a href="https://twitter.com/apnom" target="_blank">Twitter</a> or <a href="https://dribbble.com/apnom" target="_blank">Dribbble</a></p>
+    </div>
+
   </body>
 
 </html>
